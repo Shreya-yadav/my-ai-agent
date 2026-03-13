@@ -1,12 +1,13 @@
 """
 AI Commit Agent
 Analyzes the Python codebase and adds a small, meaningful feature each day.
-Uses Google Gemini (free tier) via google-generativeai.
+Uses Google Gemini (free tier) via google-genai.
 """
 
 import os
 import json
-import google.generativeai as genai
+from google import genai
+from google.genai import types
 
 
 def get_python_files(root="."):
@@ -14,7 +15,10 @@ def get_python_files(root="."):
     py_files = {}
     exclude_dirs = {".git", ".github", "__pycache__", "venv", ".venv", "node_modules", "dist", "build"}
 
-    for dirpath, dirnames, filenames in os.walk(root):
+    abs_root = os.path.abspath(root)
+    print(f"🔍 Scanning for Python files in: {abs_root}")
+
+    for dirpath, dirnames, filenames in os.walk(abs_root):
         dirnames[:] = [d for d in dirnames if d not in exclude_dirs]
         for fname in filenames:
             if fname.endswith(".py"):
@@ -22,9 +26,11 @@ def get_python_files(root="."):
                 try:
                     with open(fpath, "r", encoding="utf-8") as f:
                         content = f.read()
-                    py_files[fpath] = content
-                except Exception:
-                    pass
+                    rel_path = os.path.relpath(fpath, abs_root)
+                    py_files[rel_path] = content
+                    print(f"   Found: {rel_path}")
+                except Exception as e:
+                    print(f"   Could not read {fpath}: {e}")
 
     return py_files
 
@@ -32,22 +38,15 @@ def get_python_files(root="."):
 def build_codebase_summary(py_files):
     """Build a summary string of the codebase for the prompt."""
     parts = []
-    for path, content in list(py_files.items())[:20]:  # Limit to 20 files
-        snippet = content[:3000]  # First 3000 chars per file
+    for path, content in list(py_files.items())[:20]:
+        snippet = content[:3000]
         parts.append(f"### {path}\n```python\n{snippet}\n```")
     return "\n\n".join(parts)
 
 
 def run_ai_agent(codebase_summary):
     """Call Gemini to decide on and implement a small feature addition."""
-    genai.configure(api_key=os.environ["GEMINI_API_KEY"])
-    model = genai.GenerativeModel(
-        model_name="gemini-1.5-flash",  # Free tier model
-        generation_config=genai.GenerationConfig(
-            max_output_tokens=4096,
-            temperature=0.4,
-        ),
-    )
+    client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
     prompt = f"""You are a senior Python developer working on a project.
 Your job is to add ONE small, useful, self-contained feature to the codebase every day.
@@ -73,13 +72,19 @@ Here is the current Python codebase:
 
 Analyze the code and add one small, meaningful feature. Return ONLY the JSON."""
 
-    response = model.generate_content(prompt)
+    response = client.models.generate_content(
+        model="gemini-2.0-flash",
+        contents=prompt,
+        config=types.GenerateContentConfig(
+            max_output_tokens=4096,
+            temperature=0.4,
+        ),
+    )
     return response.text
 
 
 def apply_changes(result_json):
     """Parse AI response and apply file changes."""
-    # Strip markdown code fences if present
     text = result_json.strip()
     if text.startswith("```"):
         text = text.split("```")[1]
@@ -94,7 +99,6 @@ def apply_changes(result_json):
     commit_message = data["commit_message"]
     description = data.get("description", "")
 
-    # Ensure the directory exists
     os.makedirs(os.path.dirname(file_path) if os.path.dirname(file_path) else ".", exist_ok=True)
 
     with open(file_path, "w", encoding="utf-8") as f:
@@ -104,7 +108,6 @@ def apply_changes(result_json):
     print(f"📝 Description: {description}")
     print(f"💬 Commit message: {commit_message}")
 
-    # Write commit message to a temp file for the workflow to use
     with open("/tmp/commit_message.txt", "w") as f:
         f.write(commit_message)
 
@@ -116,14 +119,14 @@ def main():
 
     py_files = get_python_files()
     if not py_files:
-        print("No Python files found. Exiting.")
+        print("❌ No Python files found. Make sure your repo has at least one .py file.")
         return
 
-    print(f"📂 Found {len(py_files)} Python files")
+    print(f"📂 Found {len(py_files)} Python file(s)")
 
     codebase_summary = build_codebase_summary(py_files)
 
-    print("🧠 Asking Claude for a feature suggestion...")
+    print("🧠 Asking Gemini for a feature suggestion...")
     result = run_ai_agent(codebase_summary)
 
     print("⚙️  Applying changes...")
