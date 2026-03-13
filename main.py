@@ -27,9 +27,15 @@ def divide(a: float, b: float) -> float:
     return a / b
 
 
+def exponentiate(base: float, exponent: float) -> float:
+    """Raise base to the power of exponent."""
+    return base ** exponent
+
+
 if __name__ == "__main__":
     print(greet("World"))
     print(add(10, 5))
     print(subtract(10, 5))
     print(multiply(10, 5))
     print(divide(10, 5))
+    print(exponentiate(2, 3))
