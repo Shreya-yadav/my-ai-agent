@@ -73,7 +73,7 @@ Here is the current Python codebase:
 Analyze the code and add one small, meaningful feature. Return ONLY the JSON."""
 
     response = client.models.generate_content(
-        model="gemini-2.0-flash",
+        model="gemini-1.5-flash",
         contents=prompt,
         config=types.GenerateContentConfig(
             max_output_tokens=4096,
