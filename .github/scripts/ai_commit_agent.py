@@ -44,9 +44,43 @@ def build_codebase_summary(py_files):
     return "\n\n".join(parts)
 
 
+def list_available_models(client):
+    """Print all available models for debugging."""
+    print("📋 Available Gemini models:")
+    available = []
+    for m in client.models.list():
+        print(f"   {m.name}")
+        available.append(m.name)
+    return available
+
+
+def pick_model(available_models):
+    """Pick the best available free-tier model."""
+    preferred = [
+        "models/gemini-1.5-flash",
+        "models/gemini-1.5-flash-001",
+        "models/gemini-1.5-flash-002",
+        "models/gemini-1.5-pro",
+        "models/gemini-1.0-pro",
+    ]
+    for model in preferred:
+        if model in available_models:
+            print(f"✅ Using model: {model}")
+            return model
+    # Fallback: pick first model with 'flash' or 'pro' in name
+    for m in available_models:
+        if "flash" in m or "pro" in m:
+            print(f"✅ Fallback model: {m}")
+            return m
+    raise RuntimeError("No suitable Gemini model found.")
+
+
 def run_ai_agent(codebase_summary):
     """Call Gemini to decide on and implement a small feature addition."""
     client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+
+    available = list_available_models(client)
+    model = pick_model(available)
 
     prompt = f"""You are a senior Python developer working on a project.
 Your job is to add ONE small, useful, self-contained feature to the codebase every day.
@@ -73,7 +107,7 @@ Here is the current Python codebase:
 Analyze the code and add one small, meaningful feature. Return ONLY the JSON."""
 
     response = client.models.generate_content(
-        model="models/gemini-1.5-flash-latest",
+        model=model,
         contents=prompt,
         config=types.GenerateContentConfig(
             max_output_tokens=4096,
