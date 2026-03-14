@@ -39,6 +39,13 @@ def exponentiate(base: float, exponent: float) -> float:
     return base ** exponent
 
 
+def modulo(a: float, b: float) -> float:
+    """Return the remainder of a divided by b."""
+    if b == 0:
+        raise ValueError("Cannot perform modulo with zero divisor.")
+    return a % b
+
+
 if __name__ == "__main__":
     print(greet("World"))
     print(add(10, 5))
@@ -47,3 +54,4 @@ if __name__ == "__main__":
     print(divide(10, 5))
     print(floor_divide(10, 3)) # Example for floor division
     print(exponentiate(2, 3))
+    print(modulo(10, 3)) # Example for modulo operation
