@@ -27,6 +27,13 @@ def divide(a: float, b: float) -> float:
     return a / b
 
 
+def floor_divide(a: float, b: float) -> float:
+    """Perform floor division of a by b."""
+    if b == 0:
+        raise ValueError("Cannot divide by zero.")
+    return a // b
+
+
 def exponentiate(base: float, exponent: float) -> float:
     """Raise base to the power of exponent."""
     return base ** exponent
@@ -38,4 +45,5 @@ if __name__ == "__main__":
     print(subtract(10, 5))
     print(multiply(10, 5))
     print(divide(10, 5))
+    print(floor_divide(10, 3)) # Example for floor division
     print(exponentiate(2, 3))
