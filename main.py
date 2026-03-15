@@ -46,6 +46,11 @@ def modulo(a: float, b: float) -> float:
     return a % b
 
 
+def absolute(number: float) -> float:
+    """Return the absolute value of a number."""
+    return abs(number)
+
+
 if __name__ == "__main__":
     print(greet("World"))
     print(add(10, 5))
@@ -55,3 +60,4 @@ if __name__ == "__main__":
     print(floor_divide(10, 3)) # Example for floor division
     print(exponentiate(2, 3))
     print(modulo(10, 3)) # Example for modulo operation
+    print(absolute(-7.5)) # Example for absolute value
