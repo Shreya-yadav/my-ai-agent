@@ -1,4 +1,5 @@
 # My AI-enhanced Python project
+import math
 
 def greet(name: str) -> str:
     """Return a greeting message."""
@@ -51,6 +52,13 @@ def absolute(number: float) -> float:
     return abs(number)
 
 
+def square_root(number: float) -> float:
+    """Return the square root of a non-negative number."""
+    if number < 0:
+        raise ValueError("Cannot calculate square root of a negative number.")
+    return math.sqrt(number)
+
+
 if __name__ == "__main__":
     print(greet("World"))
     print(add(10, 5))
@@ -61,3 +69,5 @@ if __name__ == "__main__":
     print(exponentiate(2, 3))
     print(modulo(10, 3)) # Example for modulo operation
     print(absolute(-7.5)) # Example for absolute value
+    print(square_root(25)) # Example for square root
+    print(square_root(2)) # Another example
