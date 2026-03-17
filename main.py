@@ -52,6 +52,11 @@ def absolute(number: float) -> float:
     return abs(number)
 
 
+def round_number(number: float, ndigits: int = 0) -> float:
+    """Round a number to a given precision in decimal digits."""
+    return round(number, ndigits)
+
+
 def square_root(number: float) -> float:
     """Return the square root of a non-negative number."""
     if number < 0:
@@ -69,5 +74,7 @@ if __name__ == "__main__":
     print(exponentiate(2, 3))
     print(modulo(10, 3)) # Example for modulo operation
     print(absolute(-7.5)) # Example for absolute value
+    print(round_number(3.14159, 2)) # Example for rounding
+    print(round_number(3.7)) # Example for rounding to nearest integer
     print(square_root(25)) # Example for square root
     print(square_root(2)) # Another example
