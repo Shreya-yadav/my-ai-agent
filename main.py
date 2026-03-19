@@ -62,6 +62,11 @@ def ceil_number(number: float) -> float:
     return math.ceil(number)
 
 
+def floor_number(number: float) -> float:
+    """Return the floor of a number."""
+    return math.floor(number)
+
+
 def square_root(number: float) -> float:
     """Return the square root of a non-negative number."""
     if number < 0:
@@ -83,5 +88,7 @@ if __name__ == "__main__":
     print(round_number(3.7)) # Example for rounding to nearest integer
     print(ceil_number(3.14)) # Example for ceiling
     print(ceil_number(3.7)) # Another example for ceiling
+    print(floor_number(3.14)) # Example for floor
+    print(floor_number(3.7)) # Another example for floor
     print(square_root(25)) # Example for square root
     print(square_root(2)) # Another example
