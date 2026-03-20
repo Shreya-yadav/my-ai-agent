@@ -74,6 +74,13 @@ def square_root(number: float) -> float:
     return math.sqrt(number)
 
 
+def natural_logarithm(number: float) -> float:
+    """Return the natural logarithm (base e) of a positive number."""
+    if number <= 0:
+        raise ValueError("Cannot calculate natural logarithm of a non-positive number.")
+    return math.log(number)
+
+
 if __name__ == "__main__":
     print(greet("World"))
     print(add(10, 5))
@@ -92,3 +99,5 @@ if __name__ == "__main__":
     print(floor_number(3.7)) # Another example for floor
     print(square_root(25)) # Example for square root
     print(square_root(2)) # Another example
+    print(natural_logarithm(math.e)) # Example for natural logarithm
+    print(natural_logarithm(10)) # Another example
