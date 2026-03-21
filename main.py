@@ -81,6 +81,15 @@ def natural_logarithm(number: float) -> float:
     return math.log(number)
 
 
+def logarithm(number: float, base: float) -> float:
+    """Return the logarithm of a positive number to a given positive base."""
+    if number <= 0:
+        raise ValueError("Cannot calculate logarithm of a non-positive number.")
+    if base <= 0 or base == 1:
+        raise ValueError("Base for logarithm must be positive and not equal to 1.")
+    return math.log(number, base)
+
+
 if __name__ == "__main__":
     print(greet("World"))
     print(add(10, 5))
@@ -101,3 +110,5 @@ if __name__ == "__main__":
     print(square_root(2)) # Another example
     print(natural_logarithm(math.e)) # Example for natural logarithm
     print(natural_logarithm(10)) # Another example
+    print(logarithm(100, 10)) # Example for logarithm base 10
+    print(logarithm(8, 2)) # Example for logarithm base 2
