@@ -90,6 +90,11 @@ def logarithm(number: float, base: float) -> float:
     return math.log(number, base)
 
 
+def sine(angle_radians: float) -> float:
+    """Return the sine of an angle given in radians."""
+    return math.sin(angle_radians)
+
+
 if __name__ == "__main__":
     print(greet("World"))
     print(add(10, 5))
@@ -103,12 +108,5 @@ if __name__ == "__main__":
     print(round_number(3.14159, 2)) # Example for rounding
     print(round_number(3.7)) # Example for rounding to nearest integer
     print(ceil_number(3.14)) # Example for ceiling
-    print(ceil_number(3.7)) # Another example for ceiling
-    print(floor_number(3.14)) # Example for floor
-    print(floor_number(3.7)) # Another example for floor
-    print(square_root(25)) # Example for square root
-    print(square_root(2)) # Another example
-    print(natural_logarithm(math.e)) # Example for natural logarithm
-    print(natural_logarithm(10)) # Another example
-    print(logarithm(100, 10)) # Example for logarithm base 10
-    print(logarithm(8, 2)) # Example for logarithm base 2
+    print(ceil_number(3.7)) #
+    print(sine(math.pi / 2)) # Example for sine function
