@@ -95,6 +95,11 @@ def sine(angle_radians: float) -> float:
     return math.sin(angle_radians)
 
 
+def cosine(angle_radians: float) -> float:
+    """Return the cosine of an angle given in radians."""
+    return math.cos(angle_radians)
+
+
 if __name__ == "__main__":
     print(greet("World"))
     print(add(10, 5))
@@ -106,7 +111,4 @@ if __name__ == "__main__":
     print(modulo(10, 3)) # Example for modulo operation
     print(absolute(-7.5)) # Example for absolute value
     print(round_number(3.14159, 2)) # Example for rounding
-    print(round_number(3.7)) # Example for rounding to nearest integer
-    print(ceil_number(3.14)) # Example for ceiling
-    print(ceil_number(3.7)) #
-    print(sine(math.pi / 2)) # Example for sine function
+    print(round_n
