@@ -90,6 +90,11 @@ def logarithm(number: float, base: float) -> float:
     return math.log(number, base)
 
 
+def degrees_to_radians(degrees: float) -> float:
+    """Convert an angle from degrees to radians."""
+    return math.radians(degrees)
+
+
 def sine(angle_radians: float) -> float:
     """Return the sine of an angle given in radians."""
     return math.sin(angle_radians)
@@ -108,7 +113,4 @@ if __name__ == "__main__":
     print(divide(10, 5))
     print(floor_divide(10, 3)) # Example for floor division
     print(exponentiate(2, 3))
-    print(modulo(10, 3)) # Example for modulo operation
-    print(absolute(-7.5)) # Example for absolute value
-    print(round_number(3.14159, 2)) # Example for rounding
-    print(round_n
+    print(modulo(10, 3)) # Example for modulo ope
