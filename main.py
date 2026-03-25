@@ -104,6 +104,10 @@ def cosine(angle_radians: float) -> float:
     """Return the cosine of an angle given in radians."""
     return math.cos(angle_radians)
 
+def tangent(angle_radians: float) -> float:
+    """Return the tangent of an angle given in radians."""
+    return math.tan(angle_radians)
+
 
 if __name__ == "__main__":
     print(greet("World"))
@@ -111,6 +115,4 @@ if __name__ == "__main__":
     print(subtract(10, 5))
     print(multiply(10, 5))
     print(divide(10, 5))
-    print(floor_divide(10, 3)) # Example for floor division
-    print(exponentiate(2, 3))
-    print(modulo(10, 3)) # Example for modulo ope
+   
