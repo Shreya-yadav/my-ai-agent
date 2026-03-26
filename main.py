@@ -95,6 +95,11 @@ def degrees_to_radians(degrees: float) -> float:
     return math.radians(degrees)
 
 
+def radians_to_degrees(radians: float) -> float:
+    """Convert an angle from radians to degrees."""
+    return math.degrees(radians)
+
+
 def sine(angle_radians: float) -> float:
     """Return the sine of an angle given in radians."""
     return math.sin(angle_radians)
@@ -109,10 +114,4 @@ def tangent(angle_radians: float) -> float:
     return math.tan(angle_radians)
 
 
-if __name__ == "__main__":
-    print(greet("World"))
-    print(add(10, 5))
-    print(subtract(10, 5))
-    print(multiply(10, 5))
-    print(divide(10, 5))
-   
+if __name__ == "__
