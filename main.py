@@ -112,6 +112,3 @@ def cosine(angle_radians: float) -> float:
 def tangent(angle_radians: float) -> float:
     """Return the tangent of an angle given in radians."""
     return math.tan(angle_radians)
-
-
-if __name__ == "__
