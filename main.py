@@ -112,3 +112,8 @@ def cosine(angle_radians: float) -> float:
 def tangent(angle_radians: float) -> float:
     """Return the tangent of an angle given in radians."""
     return math.tan(angle_radians)
+
+
+def arctangent(x: float) -> float:
+    """Return the arc tangent (inverse tangent) of x, in radians."""
+    return math.atan(x)
