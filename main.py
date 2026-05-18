@@ -109,6 +109,13 @@ def cosine(angle_radians: float) -> float:
     """Return the cosine of an angle given in radians."""
     return math.cos(angle_radians)
 
+
 def tangent(angle_radians: float) -> float:
     """Return the tangent of an angle given in radians."""
+    # Tangent is sin(x) / cos(x). It's undefined when cos(x) is 0.
+    # We check if cos(angle_radians) is very close to 0 to prevent division by (near) zero.
+    cos_val = math.cos(angle_radians)
+    # Use a small epsilon for floating point comparison.
+    if abs(cos_val) < 1e-9:
+        raise ValueError("Tangent is undefined for angles where cosine is zero.")
     return math.tan(angle_radians)
