@@ -109,6 +109,11 @@ def cosine(angle_radians: float) -> float:
     """Return the cosine of an angle given in radians."""
     return math.cos(angle_radians)
 
-def tangent(angle_radians: float) -> float:
-    """Return the tangent of an angle given in radians."""
-    return math.tan(angle_radians)
+
+def arcsine(x: float) -> float:
+    """Return the arc sine (inverse sine) of x, in radians."""
+    if not -1 <= x <= 1:
+        raise ValueError("Input for arcsine must be between -1 and 1.")
+    return math.asin(x)
+
+def tangent(angle_radi
