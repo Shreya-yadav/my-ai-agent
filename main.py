@@ -112,6 +112,6 @@ def cosine(angle_radians: float) -> float:
 
 def arcsine(x: float) -> float:
     """Return the arc sine (inverse sine) of x, in radians."""
-    if not -1 <= x <= 1:
-        raise ValueError("Input for arcsine must be between -1 and 1.")
+    if not (-1 <= x <= 1):
+        raise ValueError("Input x for arcsine must be between -1 and 1.")
     return math.asin(x)
