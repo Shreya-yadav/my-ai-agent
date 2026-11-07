@@ -99,7 +99,6 @@ def radians_to_degrees(radians: float) -> float:
     """Convert an angle from radians to degrees."""
     return math.degrees(radians)
 
-
 def sine(angle_radians: float) -> float:
     """Return the sine of an angle given in radians."""
     return math.sin(angle_radians)
@@ -109,9 +108,8 @@ def cosine(angle_radians: float) -> float:
     """Return the cosine of an angle given in radians."""
     return math.cos(angle_radians)
 
-
 def arcsine(x: float) -> float:
-    """Return the arcsine (inverse sine) of x, in radians."""
-    if not -1 <= x <= 1:
+    """Return the arc sine (inverse sine) of x, in radians."""
+    if not (-1 <= x <= 1):
         raise ValueError("Input for arcsine must be between -1 and 1.")
     return math.asin(x)
